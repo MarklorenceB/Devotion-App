@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["cdn.sanity.io"],
+    domains: [
+      "cdn.sanity.io",
+      "lh3.googleusercontent.com",
+      "d1aeh7hxqn8xf9.cloudfront.net",
+    ],
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
