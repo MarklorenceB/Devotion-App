@@ -22,27 +22,28 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <>
-      <section className="pink_container !min-h-[230px]">
+      {/* Hero Section */}
+      <section className="pink_container !min-h-[230px] px-4 sm:px-6 lg:px-8">
         <p className="tag">{formatDate(post?._createdAt)}</p>
 
         <h1 className="heading mt-5">{post.title}</h1>
         <p className="sub-heading !max-w-5xl mt-3">{post.description}</p>
       </section>
 
-      <img
-        src={post.image}
-        alt="thumbnail"
-        className="rounded-xl text-center mx-auto mt-10"
-        width={800}
-        height={800}
-      />
+      <div className="w-full flex justify-center mt-10 px-4 sm:px-6 lg:px-8">
+        <Image
+          src={post.image}
+          alt="thumbnail"
+          width={1200}
+          height={800}
+          className="rounded-xl object-cover w-full max-w-5xl h-[400px] sm:h-[500px] shadow-lg"
+          priority
+        />
+      </div>
 
-      <div className="space-y-5 mt-10 max-w-4xl mx-auto">
+      {/* Content Wrapper */}
+      <div className="space-y-5 mt-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex-between gap-5">
-          {/* <Link
-            href={`/user/${post.author?._id}`}
-            className="flex gap-2 items-center mb-3"
-          ></Link> */}
           <div className="flex gap-3 items-center mb-3">
             {post.author?.image ? (
               <Image
@@ -66,15 +67,17 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <p className="category-tag">{post.category}</p>
         </div>
 
+        {/* Pitch Details */}
         <h3 className="text-30-bold">Pitch Details</h3>
         {parsedContent ? (
           <article
-            className="prose max-w-4xl font-work-sans break-all"
+            className="prose max-w-4xl font-work-sans break-words"
             dangerouslySetInnerHTML={{ __html: parsedContent }}
           />
         ) : (
           <p className="no-result">No details provided</p>
         )}
+
         <hr className="divider" />
 
         <Suspense fallback={<Skeleton />}>
