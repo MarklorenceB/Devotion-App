@@ -4,7 +4,7 @@ import StrartupCard, { StartupTypeCard } from "@/components/StrartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
-
+import Footer from "@/components/Footer";
 export default async function Home({
   searchParams,
 }: {
@@ -23,13 +23,12 @@ export default async function Home({
     <>
       <section className="pink_container">
         <h1 className="heading">
-          Pitch Your Startup, <br />
-          Connect With Entrepreneurs
+          Share Your Devotion, <br></br> Connect With Believers
         </h1>
 
         <p className="sub-heading !max-w-3xl mt-5">
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competitions.
+          Share your ideas, support others with your vote, and shine in virtual
+          competitions.
         </p>
 
         <SearchForm query={query} />
@@ -37,7 +36,7 @@ export default async function Home({
 
       <section className="section_container">
         <p className="text-30-semibold">
-          {query ? `Search results for "${query}"` : "All Startups"}
+          {query ? `Search results for "${query}"` : " All Devotions"}
         </p>
 
         <ul className="mt-7 card_grid">
@@ -52,6 +51,8 @@ export default async function Home({
 
         <SanityLive />
       </section>
+
+      <Footer />
     </>
   );
 }

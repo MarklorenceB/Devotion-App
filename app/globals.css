@@ -113,6 +113,21 @@
   }
 }
 
+@media (max-width: 640px) {
+  .heading {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  .sub-heading {
+    font-size: 15px;
+  }
+  .search-input::placeholder {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333333;
+  }
+}
+
 .sub-heading {
   font-weight: 500;
   font-size: 20px;
@@ -169,6 +184,7 @@
   max-width: 80rem;
   margin: 0 auto;
   display: flex;
+
   flex-direction: column;
   gap: 40px;
 }
@@ -180,7 +196,7 @@
 }
 
 .profile_card {
-  width: 20rem;
+  width: 30rem;
   padding: 80px 24px 24px;
   display: flex;
   flex-direction: column;

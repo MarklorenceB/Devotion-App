@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/utils";
-import { EyeIcon } from "lucide-react"; // <-- dito lang si EyeIcon
+import { Book, EyeIcon } from "lucide-react"; // <-- dito lang si EyeIcon
 import Link from "next/link"; // <-- dapat galing sa next/link
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -44,13 +44,8 @@ const StrartupCard = ({ post }: { post: StartupTypeCard }) => {
             {title}
           </Link>
         </div>
-        <Image
-          src={post.author?.image || "https://placehold.co/64x64"}
-          alt={post.author?.name || "avatar"}
-          width={64}
-          height={64}
-          className="rounded-full drop-shadow-lg object-cover"
-        />
+
+        <Book className="w-10 h-10 text-dark-600" />
       </div>
 
       <Link href={`/startup/${_id}`}>

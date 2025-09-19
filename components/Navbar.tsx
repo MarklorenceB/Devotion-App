@@ -4,35 +4,66 @@ import Image from "next/image";
 
 import { auth, signOut, signIn } from "@/auth";
 import { Span } from "next/dist/trace";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { BadgePlus, LogOut } from "lucide-react";
 
 export const Navbar = async () => {
   const session = await auth();
 
   return (
-    <header className="px-50 py-3 bg-white shadow-md font-work-sans">
-      <nav className="flex justify-between item-center">
+    <header className="px-4 sm:px-6 py-3 bg-white shadow-md font-work-sans">
+      <nav className="flex justify-between items-center">
+        {/* Logo */}
         <Link href="/" className="font-bold text-lg">
-          <Image src="/logo.png" alt="Logo" width={120} height={30} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={100}
+            height={50}
+            className="object-contain"
+          />
         </Link>
 
-        <div className="flex items-center gap-5 text-black font-medium">
+        {/* Right side */}
+        <div className="flex items-center gap-4 text-black font-medium">
           {session && session?.user ? (
             <>
-              <Link href="/startup/create">
-                <span className="max-sm:hidden">Create</span>
+              {/* Create button / icon */}
+              <Link
+                href="/startup/create"
+                className="flex items-center gap-1 text-sm sm:text-base"
+              >
+                <BadgePlus className="size-6" />
+                <span className="hidden sm:inline">Create</span>
               </Link>
 
+              {/* Logout */}
               <form
                 action={async () => {
                   "use server";
-
                   await signOut({ redirectTo: "/" });
                 }}
               >
-                <button type="submit">Logout</button>
+                <button
+                  type="submit"
+                  className="flex items-center gap-1 text-sm sm:text-base"
+                >
+                  <LogOut className="size-6 text-red-500" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
               </form>
-              <Link href={`/user/${session?.user.id}`}>
-                <span>{session?.user?.name}</span>
+
+              {/* Avatar */}
+              <Link href={`/user/${session?.id}`}>
+                <Avatar className="">
+                  <AvatarImage
+                    src={session?.user?.image || ""}
+                    alt={session?.user?.name || ""}
+                    width={60}
+                    className="rounded-full object-cover"
+                  />
+                  <AvatarFallback>AV</AvatarFallback>
+                </Avatar>
               </Link>
             </>
           ) : (
@@ -42,7 +73,12 @@ export const Navbar = async () => {
                 await signIn("google");
               }}
             >
-              <button type="submit">Signin with Google</button>
+              <button
+                type="submit"
+                className="px-3 py-1 rounded-md bg-purple-600 text-white text-sm sm:text-base"
+              >
+                Sign in
+              </button>
             </form>
           )}
         </div>

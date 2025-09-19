@@ -64,28 +64,28 @@ const StartupForm = () => {
     <form action={formAction} className="startup-form">
       <div>
         <label htmlFor="title" className="startup-form_label mb-4">
-          Title
+          Devotion Title
         </label>
         <Input
           id="title"
           name="title"
           className="startup-form_input mb-4"
           required
-          placeholder="Startup Title"
+          placeholder="Example: “Faith Over Fear”"
         />
         {errors.title && <p className="startup-form_error">{errors.title}</p>}
       </div>
 
       <div>
         <label htmlFor="description" className="startup-form_label mb-4">
-          Description
+          Devotion Description
         </label>
         <Textarea
           id="description"
           name="description"
           className="startup-form_textarea mb-4"
           required
-          placeholder="Startup Description"
+          placeholder="Example: A reflection on trusting God in uncertain times, inspired by Psalm 56:3"
         />
         {errors.description && (
           <p className="startup-form_error">{errors.description}</p>
@@ -94,14 +94,14 @@ const StartupForm = () => {
 
       <div>
         <label htmlFor="category" className="startup-form_label mb-4">
-          Category
+          Devotion Theme
         </label>
         <Input
           id="category"
           name="category"
           className="startup-form_input mb-4"
           required
-          placeholder="Startup Category (Tech, Health, Education...)"
+          placeholder="“Faith”, “Grace”, “Forgiveness”, “Hope”, “Spiritual Growth”"
         />
         {errors.category && (
           <p className="startup-form_error">{errors.category}</p>
@@ -110,21 +110,21 @@ const StartupForm = () => {
 
       <div>
         <label htmlFor="link" className="startup-form_label mb-4">
-          Image URL
+          Devotion Image URL
         </label>
         <Input
           id="link"
           name="link"
           className="startup-form_input mb-4"
           required
-          placeholder="Startup Image URL"
+          placeholder="A link to a peaceful nature scene, a cross, or scripture artwork"
         />
         {errors.link && <p className="startup-form_error">{errors.link}</p>}
       </div>
 
       <div data-color-mode="light">
         <label htmlFor="pitch" className="startup-form_label mb-4">
-          Pitch
+          Devotion Summary or Key Message
         </label>
         <MDEditor
           value={pitch}
@@ -136,7 +136,7 @@ const StartupForm = () => {
           style={{ borderRadius: 20, overflow: "hidden" }}
           textareaProps={{
             placeholder:
-              "Briefly describe your idea and what problem it solves",
+              "Example: “This devotion encourages believers to lean on God’s promises when fear threatens to take hold.”",
           }}
           previewOptions={{
             disallowedElements: ["style"],
