@@ -1,13 +1,11 @@
+// 4. components/Navbar.tsx - Updated main navbar component
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { auth, signIn } from "@/auth";
+import AuthenticatedNav from "./AuthenticatedNav";
 
-import { auth, signOut, signIn } from "@/auth";
-import { Span } from "next/dist/trace";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { BadgePlus, LogOut } from "lucide-react";
-
-export const Navbar = async () => {
+const Navbar = async () => {
   const session = await auth();
 
   return (
@@ -27,45 +25,7 @@ export const Navbar = async () => {
         {/* Right side */}
         <div className="flex items-center gap-4 text-black font-medium">
           {session && session?.user ? (
-            <>
-              {/* Create button / icon */}
-              <Link
-                href="/startup/create"
-                className="flex items-center gap-1 text-sm sm:text-base"
-              >
-                <BadgePlus className="size-6" />
-                <span className="hidden sm:inline">Create</span>
-              </Link>
-
-              {/* Logout */}
-              <form
-                action={async () => {
-                  "use server";
-                  await signOut({ redirectTo: "/" });
-                }}
-              >
-                <button
-                  type="submit"
-                  className="flex items-center gap-1 text-sm sm:text-base"
-                >
-                  <LogOut className="size-6 text-red-500" />
-                  <span className="hidden sm:inline">Logout</span>
-                </button>
-              </form>
-
-              {/* Avatar */}
-              <Link href={`/user/${session?.id}`}>
-                <Avatar className="">
-                  <AvatarImage
-                    src={session?.user?.image || ""}
-                    alt={session?.user?.name || ""}
-                    width={60}
-                    className="rounded-full object-cover"
-                  />
-                  <AvatarFallback>AV</AvatarFallback>
-                </Avatar>
-              </Link>
-            </>
+            <AuthenticatedNav user={session.user} userId={session.id} />
           ) : (
             <form
               action={async () => {

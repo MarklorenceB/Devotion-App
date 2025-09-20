@@ -5,32 +5,38 @@ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
 import Footer from "@/components/Footer";
+
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { query?: string };
+  searchParams?: Promise<{ query?: string }>;
 }) {
-  const query = searchParams?.query;
-  const params = { search: query || null };
+  // Await the searchParams promise before accessing its properties
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query;
 
+  const params = { search: query || null };
   const session = await auth();
 
   console.log(session?.id);
 
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+  const { data: posts } = await sanityFetch({
+    query: STARTUPS_QUERY,
+    params,
+  });
 
   return (
     <>
       <section className="pink_container">
         <h1 className="heading">
-          Share Your Devotion, <br></br> Connect With Believers
+          Share Your Devotion,
+          <br />
+          Connect With Believers
         </h1>
-
         <p className="sub-heading !max-w-3xl mt-5">
           Share your ideas, support others with your vote, and shine in virtual
           competitions.
         </p>
-
         <SearchForm query={query} />
       </section>
 
@@ -38,7 +44,6 @@ export default async function Home({
         <p className="text-30-semibold">
           {query ? `Search results for "${query}"` : " All Devotions"}
         </p>
-
         <ul className="mt-7 card_grid">
           {posts.length > 0 ? (
             posts.map((post: StartupTypeCard) => (
@@ -48,10 +53,8 @@ export default async function Home({
             <p className="no-results">No startups found</p>
           )}
         </ul>
-
         <SanityLive />
       </section>
-
       <Footer />
     </>
   );
