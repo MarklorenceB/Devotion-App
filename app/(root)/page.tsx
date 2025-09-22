@@ -35,8 +35,9 @@ export default async function Home({
           Connect With Believers
         </h1>
         <p className="sub-heading !max-w-3xl mt-5">
-          Share your ideas, support others with your vote, and shine in virtual
-          competitions.
+          Read daily devotionals, reflect on God’s word, and grow your faith
+          every day. Share insights, support others with your thoughts, and
+          shine in your spiritual journey.
         </p>
         <SearchForm query={query} />
       </section>

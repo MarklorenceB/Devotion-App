@@ -29,17 +29,15 @@ export const startup = defineType({
       type: "url",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "pitch",
-      title: "Pitch",
-      type: "text", // ⛔ changed from "markdown" (use plugin if you want markdown)
-    }),
+    defineField({ name: "pitch", title: "Pitch", type: "text" }),
     defineField({
       name: "views",
       title: "Views",
       type: "number",
       initialValue: 0,
     }),
+
+    // ✅ reactions as arrays of usernames
     defineField({
       name: "reactions",
       title: "Reactions",
@@ -48,39 +46,40 @@ export const startup = defineType({
         defineField({
           name: "like",
           title: "Likes",
-          type: "number",
-          initialValue: 0,
-          validation: (Rule) => Rule.min(0),
+          type: "array",
+          of: [{ type: "string" }],
+          initialValue: [],
         }),
         defineField({
           name: "love",
           title: "Love",
-          type: "number",
-          initialValue: 0,
-          validation: (Rule) => Rule.min(0),
+          type: "array",
+          of: [{ type: "string" }],
+          initialValue: [],
         }),
         defineField({
           name: "pray",
           title: "Pray",
-          type: "number",
-          initialValue: 0,
-          validation: (Rule) => Rule.min(0),
+          type: "array",
+          of: [{ type: "string" }],
+          initialValue: [],
         }),
         defineField({
           name: "wow",
           title: "Wow",
-          type: "number",
-          initialValue: 0,
-          validation: (Rule) => Rule.min(0),
+          type: "array",
+          of: [{ type: "string" }],
+          initialValue: [],
         }),
       ],
       initialValue: {
-        like: 0,
-        love: 0,
-        pray: 0,
-        wow: 0,
+        like: [],
+        love: [],
+        pray: [],
+        wow: [],
       },
     }),
+
     defineField({
       name: "author",
       title: "Author",
