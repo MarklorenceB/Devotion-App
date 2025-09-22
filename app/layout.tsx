@@ -59,6 +59,11 @@ const workSans = localFont({
 export const metadata: Metadata = {
   title: "GPLC Devotion",
   description: "This help one to keep track of my daily devotion",
+  icons: {
+    icon: "/favicon.png", // place your favicon in the /public folder
+    shortcut: "/favicon.png",
+    apple: "/favicon.png", // optional for iOS
+  },
 };
 
 export default function RootLayout({

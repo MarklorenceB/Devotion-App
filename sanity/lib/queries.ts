@@ -12,6 +12,7 @@ export const STARTUPS_QUERY = defineQuery(`
       bio
     },
     views,
+    reactions,
     description,
     category,
     image

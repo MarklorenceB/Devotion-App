@@ -452,15 +452,29 @@
 }
 
 .view-text {
-  font-weight: 500;
-  font-size: 16px;
-  background-color: #ffe8f0;
-  padding: 8px 16px;
-  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #034c21; /* nice pink text */
+  background: linear-gradient(135deg, #ffe8f0, #ffd6e8);
+  padding: 10px 20px;
+  border-radius: 12px;
   text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* space if you add icon */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(214, 51, 108, 0.15);
 }
 
-.category-tag {
+.view-text:hover {
+  background: linear-gradient(135deg, #ffd6e8, #ffb3d6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(214, 51, 108, 0.25);
+}
+
+.view-text .category-tag {
   font-weight: 500;
   font-size: 16px;
   background-color: #ffe8f0;
@@ -487,4 +501,12 @@
 
 body {
   font-family: var(--font-work-sans);
+}
+
+.button-show {
+  background-color: #034c21; /* primary */
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 2px 2px 0px 2px rgb(0, 0, 0);
+  transition: all 0.3s;
 }

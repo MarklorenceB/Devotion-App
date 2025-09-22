@@ -1,9 +1,12 @@
+"use client";
+
 import { formatDate } from "@/lib/utils";
-import { Book, EyeIcon } from "lucide-react"; // <-- dito lang si EyeIcon
-import Link from "next/link"; // <-- dapat galing sa next/link
+import { Book, EyeIcon } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
+import ReactionButtons from "./ReactionsButton";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -17,14 +20,25 @@ const StrartupCard = ({ post }: { post: StartupTypeCard }) => {
     _id,
     image,
     description,
+    reactions,
   } = post;
+
+  // Default reaction counts if not provided
+  const defaultReactions = {
+    like: 0,
+    love: 0,
+    pray: 0,
+    wow: 0,
+    ...reactions, // Spread existing reactions to override defaults
+  };
+
   return (
     <li className="startup-card group">
       <div className="flex-between">
-        <p className="startup_card_date">{formatDate(post._createdAt)}</p>
+        <p className="startup_card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary" />
-          <span className="text-16-medium">{post.views}</span>
+          <span className="text-16-medium">{views}</span>
         </div>
       </div>
 
@@ -39,7 +53,7 @@ const StrartupCard = ({ post }: { post: StartupTypeCard }) => {
 
           <Link
             href={`/startup/${_id}`}
-            className="text-26-semibold mt-3 line-clamp-2 "
+            className="text-26-semibold mt-3 line-clamp-2 mb-3"
           >
             {title}
           </Link>
@@ -49,8 +63,7 @@ const StrartupCard = ({ post }: { post: StartupTypeCard }) => {
       </div>
 
       <Link href={`/startup/${_id}`}>
-        <p className="startup-card-desc">{description}</p>
-
+        <p className="startup-card-desc mb-4">{description}</p>
         <img src={image} alt="placeholder" className="startup-card_img" />
       </Link>
 
@@ -62,6 +75,13 @@ const StrartupCard = ({ post }: { post: StartupTypeCard }) => {
           <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
       </div>
+
+      {/* ✅ Use the separate ReactionButtons component */}
+      <ReactionButtons
+        postId={_id}
+        initialReactions={defaultReactions}
+        userId={author?._id} // Optional: pass user ID if available
+      />
     </li>
   );
 };

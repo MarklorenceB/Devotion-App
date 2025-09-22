@@ -5,6 +5,7 @@ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
 import Footer from "@/components/Footer";
+import ShowMoreButton from "@/components/ShowMoreButton";
 
 export default async function Home({
   searchParams,
@@ -44,15 +45,9 @@ export default async function Home({
         <p className="text-30-semibold">
           {query ? `Search results for "${query}"` : " All Devotions"}
         </p>
-        <ul className="mt-7 card_grid">
-          {posts.length > 0 ? (
-            posts.map((post: StartupTypeCard) => (
-              <StrartupCard key={post._id} post={post} />
-            ))
-          ) : (
-            <p className="no-results">No startups found</p>
-          )}
-        </ul>
+
+        <ShowMoreButton posts={posts} />
+
         <SanityLive />
       </section>
       <Footer />
