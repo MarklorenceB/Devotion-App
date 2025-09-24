@@ -7,6 +7,8 @@ import Image from "next/image";
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
+import Comments from "@/components/Comments";
+import Footer from "@/components/Footer";
 
 const md = new markdownit();
 
@@ -68,7 +70,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
 
         {/* Pitch Details */}
-        <h3 className="text-30-bold">Pitch Details</h3>
+        <h3 className="text-30-bold">Devotion Details</h3>
         {parsedContent ? (
           <article
             className="prose max-w-4xl font-work-sans break-words"
@@ -84,6 +86,13 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <View id={id} />
         </Suspense>
       </div>
+
+      {/* Comments Section */}
+      <div className="max-w-5xl mx-auto w-full mt-10 px-4 sm:px-6 lg:px-8 mb-5">
+        <Comments postId={post._id} comments={post.comments || []} />
+      </div>
+
+      <Footer />
     </>
   );
 };

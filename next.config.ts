@@ -8,16 +8,23 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: [
-      "cdn.sanity.io",
-      "lh3.googleusercontent.com",
-      "d1aeh7hxqn8xf9.cloudfront.net",
-    ],
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*",
+        hostname: "cdn.sanity.io",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google avatars
+      },
+      {
+        protocol: "https",
+        hostname: "d1aeh7hxqn8xf9.cloudfront.net", // your CloudFront CDN
+      },
+      {
+        protocol: "https",
+        hostname: "**", // wildcard (if you really want to allow all)
       },
     ],
   },

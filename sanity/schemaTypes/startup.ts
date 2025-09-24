@@ -37,47 +37,51 @@ export const startup = defineType({
       initialValue: 0,
     }),
 
-    // ✅ reactions as arrays of usernames
+    // ✅ Reactions as numbers
     defineField({
       name: "reactions",
       title: "Reactions",
       type: "object",
       fields: [
-        defineField({
-          name: "like",
-          title: "Likes",
-          type: "array",
-          of: [{ type: "string" }],
-          initialValue: [],
-        }),
-        defineField({
-          name: "love",
-          title: "Love",
-          type: "array",
-          of: [{ type: "string" }],
-          initialValue: [],
-        }),
-        defineField({
-          name: "pray",
-          title: "Pray",
-          type: "array",
-          of: [{ type: "string" }],
-          initialValue: [],
-        }),
-        defineField({
-          name: "wow",
-          title: "Wow",
-          type: "array",
-          of: [{ type: "string" }],
-          initialValue: [],
-        }),
+        { name: "like", title: "Likes", type: "number", initialValue: 0 },
+        { name: "love", title: "Love", type: "number", initialValue: 0 },
+        { name: "pray", title: "Pray", type: "number", initialValue: 0 },
+        { name: "wow", title: "Wow", type: "number", initialValue: 0 },
       ],
-      initialValue: {
-        like: [],
-        love: [],
-        pray: [],
-        wow: [],
-      },
+      initialValue: { like: 0, love: 0, pray: 0, wow: 0 },
+    }),
+
+    // Updated Comments array definition
+
+    defineField({
+      name: "comments",
+      title: "Comments",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "comment",
+          title: "Comment",
+          fields: [
+            { name: "user", title: "User", type: "string" },
+            { name: "avatar", title: "Avatar", type: "url" },
+            { name: "message", title: "Message", type: "text" },
+            { name: "createdAt", title: "Created At", type: "datetime" },
+            {
+              name: "reactions",
+              title: "Reactions",
+              type: "object",
+              fields: [
+                { name: "like", type: "number", initialValue: 0 },
+                { name: "love", type: "number", initialValue: 0 },
+                { name: "pray", type: "number", initialValue: 0 },
+                { name: "wow", type: "number", initialValue: 0 },
+              ],
+              initialValue: { like: 0, love: 0, pray: 0, wow: 0 },
+            },
+          ],
+        },
+      ],
     }),
 
     defineField({
